@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import car from '../../assets/car.png'
+import SignOut from './SignOut';
 
 const NavbarForDashboard = () => {
     const menuItems = <>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/blogs">Blogs</Link></li>
         <li><Link to="/dashboard">Dashboard</Link></li>
-        <li><button>Sign out</button></li>
+        <li><SignOut></SignOut></li>
         <li><Link to="/login">Login</Link></li>
-        <li><label htmlFor="dashboard-drawer" className="btn btn-primary drawer-button lg:hidden">Dashboard Menu</label></li>
+        <li><label htmlFor="dashboard-drawer" className="btn  drawer-button btn-info lg:hidden">Dashboard Menu</label></li>
     </>
     return (
         <div className="navbar bg-base-100 mt-5">
@@ -21,7 +23,7 @@ const NavbarForDashboard = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <Link to='/' className="btn btn-ghost normal-case text-xl">CAR DEALS</Link>
+                <Link to='/' className="btn btn-ghost normal-case text-xl"><img width={50} className='mr-2' src={car} alt="" /> CAR DEALS</Link>
             </div>
             <div className="navbar-end hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">

@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import car from '../../assets/car.png'
+import SignOut from './SignOut';
 
 const Navbar = () => {
     const menuItems = <>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/blogs">Blogs</Link></li>
         <li><Link to="/dashboard">Dashboard</Link></li>
-        <li><button>Sign out</button></li>
+        <li><SignOut></SignOut></li>
         <li><Link to="/login">Login</Link></li>
     </>
     return (
@@ -20,7 +22,7 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <Link to='/' className="btn btn-ghost normal-case text-xl">CAR DEALS</Link>
+                <Link to='/' className="btn btn-ghost normal-case text-xl"><img width={50} className='mr-2' src={car} alt="" /> CAR DEALS</Link>
             </div>
             <div className="navbar-end hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
