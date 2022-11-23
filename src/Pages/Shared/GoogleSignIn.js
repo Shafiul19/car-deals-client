@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import Loading from './Loading';
+import { FcGoogle } from "react-icons/fc";
 
 const GoogleSignIn = () => {
     const { googleSignIn, loading, setLoading } = useContext(AuthContext);
@@ -25,7 +26,7 @@ const GoogleSignIn = () => {
 
     return (
         <div>
-            <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+            <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'><FcGoogle className='mr-2' /> CONTINUE WITH GOOGLE</button>
         </div>
     );
 };

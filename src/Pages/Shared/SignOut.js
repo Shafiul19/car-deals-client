@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../contexts/AuthProvider';
 
+
 const SignOut = () => {
     const { logOut, user } = useContext(AuthContext);
 
@@ -17,7 +18,7 @@ const SignOut = () => {
 
     return (
         <div>
-            <button onClick={handleLogOut} >Sign Out</button>
+            <button onClick={handleLogOut} > Sign Out</button>
         </div>
     );
 };
