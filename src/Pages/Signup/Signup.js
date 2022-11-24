@@ -4,16 +4,21 @@ import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import car from '../../assets/car.png'
 import { AuthContext } from '../../contexts/AuthProvider';
+import useToken from '../../hooks/useToken';
 import GoogleSignIn from '../Shared/GoogleSignIn';
 import Loading from '../Shared/Loading';
 
 const Signup = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser, updateUser, loading } = useContext(AuthContext);
+    const { createUser, updateUser, loading, setLoading } = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
     const [createdUserEmail, setCreatedUserEmail] = useState('');
+    const [token] = useToken(createdUserEmail);
     const navigate = useNavigate();
 
+    if (token) {
+        navigate('/');
+    }
 
     const handleSignUp = data => {
 
@@ -37,6 +42,9 @@ const Signup = () => {
                 toast.error(error.message);
                 setSignUpError(error.message);
             })
+            .finally(() => {
+                setLoading(false)
+            })
 
     }
 
@@ -55,7 +63,6 @@ const Signup = () => {
                 setCreatedUserEmail(email);
                 console.log(data);
                 toast.success('User Created Successfully')
-                navigate('/');
             })
     }
 
@@ -117,8 +124,8 @@ const Signup = () => {
                         <select className='select select-info' {...register("role", {
                             required: "Roll is required"
                         })}>
-                            <option value="Buyer">Buyer</option>
-                            <option value="Seller">Seller</option>
+                            <option value="buyer">Buyer</option>
+                            <option value="seller">Seller</option>
                         </select>
                     </div>
 

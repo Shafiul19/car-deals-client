@@ -24,7 +24,7 @@ const GoogleSignIn = () => {
         toast.success('User Logged in successfully');
     }
     const handleGoogleSignIn = () => {
-        const role = "Buyer"
+        const role = "buyer"
 
         googleSignIn()
             .then(result => {
@@ -36,7 +36,9 @@ const GoogleSignIn = () => {
                 console.error(err);
                 toast.error(err.message);
             })
-            .finally(setLoading(false))
+            .finally(() => {
+                setLoading(false)
+            })
     }
 
     const saveUser = (name, email, role) => {

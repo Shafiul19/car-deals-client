@@ -10,7 +10,7 @@ import useToken from "../../hooks/useToken";
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const { signIn, loading } = useContext(AuthContext);
+    const { signIn, loading, setLoading, user } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
     const [loginUserEmail, setLoginUserEmail] = useState('');
     const [token] = useToken(loginUserEmail);
@@ -20,7 +20,7 @@ const Login = () => {
 
     if (token) {
         navigate(from, { replace: true });
-        // toast.success(`${user?.displayName} has logged in successfully`);
+        toast.success(`${user?.displayName} has logged in successfully`);
     }
     const handleLogin = data => {
         setLoginError('');
@@ -33,6 +33,9 @@ const Login = () => {
             .catch(error => {
                 setLoginError(error.message);
                 toast.error(error.message)
+            })
+            .finally(() => {
+                setLoading(false)
             })
     }
 
