@@ -2,12 +2,14 @@ import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 import useAdmin from '../hooks/useAdmin';
+import useSeller from '../hooks/useSeller';
 
 import NavbarForDashboard from '../Pages/Shared/NavbarForDashboard';
 
 const DashboardLayout = () => {
     const { user } = useContext(AuthContext);
     const [isAdmin] = useAdmin(user?.email)
+    const [isSeller] = useSeller(user?.email)
     return (
         <div>
             <NavbarForDashboard></NavbarForDashboard>
@@ -26,6 +28,13 @@ const DashboardLayout = () => {
                             isAdmin && <>
                                 <li><Link to='/dashboard/allbuyers'>All Buyers</Link></li>
                                 <li><Link to='/dashboard/allsellers'>All Seller</Link></li>
+                                <li><Link to='/dashboard/reporteditems'>Reported Items</Link></li>
+                            </>
+                        }
+                        {
+                            isSeller && <>
+                                <li><Link to='/dashboard/addproduct'>Add a product</Link></li>
+                                <li><Link to='/dashboard/myproducts'>My Products</Link></li>
                             </>
                         }
                     </ul>

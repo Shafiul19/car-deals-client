@@ -3,7 +3,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import useAdmin from '../../hooks/useAdmin';
 import Loading from '../../Pages/Shared/Loading';
-// import Loading from '../../Pages/Shared/Loading/Loading';
+
 
 const AdminRoutes = ({ children }) => {
 
