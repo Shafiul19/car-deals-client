@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
 
     const logOut = () => {
         setLoading(true);
-        localStorage.removeItem('carToken')
+        localStorage.removeItem('accessToken')
         return signOut(auth);
     };
 
