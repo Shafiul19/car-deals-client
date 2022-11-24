@@ -1,18 +1,50 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
 import car from '../../assets/car.png'
+import { AuthContext } from '../../contexts/AuthProvider';
 import GoogleSignIn from '../Shared/GoogleSignIn';
+import Loading from '../Shared/Loading';
 
 const Signup = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const { createUser, updateUser, loading } = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
-
+    const [createdUserEmail, setCreatedUserEmail] = useState('');
+    const navigate = useNavigate();
 
 
     const handleSignUp = data => {
-        console.log(data);
+
+        setSignUpError('');
+        createUser(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                toast.success('User Created Successfully');
+                const userInfo = {
+                    displayName: data.name
+                }
+                updateUser(userInfo)
+                    .then(() => {
+                        console.log('user created successfully');
+                        navigate('/')
+                    })
+                    .catch(err => console.error(err))
+            })
+            .catch(error => {
+                toast.error(error.message);
+                setSignUpError(error.message);
+            })
+
     }
+
+
+    if (loading) {
+        return <Loading></Loading>
+    }
+
     return (
         <div className='min-h-screen flex justify-center items-center'>
             <img className='hidden lg:block w-1/4 mr-10' src={car} alt="" />
