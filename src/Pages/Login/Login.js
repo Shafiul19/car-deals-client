@@ -13,15 +13,15 @@ const Login = () => {
     const { signIn, loading, setLoading, user } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
     const [loginUserEmail, setLoginUserEmail] = useState('');
-    const [token] = useToken(loginUserEmail);
+    // const [token] = useToken(loginUserEmail);
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
 
-    if (token) {
-        navigate(from, { replace: true });
-        toast.success(`${user?.displayName} has logged in successfully`);
-    }
+    // if (token) {
+    //     navigate(from, { replace: true });
+    //     toast.success(`${user?.displayName} has logged in successfully`);
+    // }
     const handleLogin = data => {
         setLoginError('');
         signIn(data.email, data.password)
@@ -29,6 +29,7 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 setLoginUserEmail(data.email);
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 setLoginError(error.message);

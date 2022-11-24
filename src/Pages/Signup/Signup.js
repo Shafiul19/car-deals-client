@@ -13,12 +13,12 @@ const Signup = () => {
     const { createUser, updateUser, loading, setLoading } = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
     const [createdUserEmail, setCreatedUserEmail] = useState('');
-    const [token] = useToken(createdUserEmail);
+    // const [token] = useToken(createdUserEmail);
     const navigate = useNavigate();
 
-    if (token) {
-        navigate('/');
-    }
+    // if (token) {
+    //     navigate('/');
+    // }
 
     const handleSignUp = data => {
 
@@ -62,6 +62,7 @@ const Signup = () => {
             .then(data => {
                 setCreatedUserEmail(email);
                 console.log(data);
+                navigate('/');
                 toast.success('User Created Successfully')
             })
     }

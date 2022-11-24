@@ -12,17 +12,17 @@ const GoogleSignIn = () => {
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
     const [createdUserEmail, setCreatedUserEmail] = useState('')
-    const [token] = useToken(createdUserEmail);
+    // const [token] = useToken(createdUserEmail);
     console.log(from);
 
     if (loading) {
         return <Loading></Loading>
     }
 
-    if (token) {
-        navigate(from, { replace: true });
-        toast.success('User Logged in successfully');
-    }
+    // if (token) {
+    //     navigate(from, { replace: true });
+    //     toast.success('User Logged in successfully');
+    // }
     const handleGoogleSignIn = () => {
         const role = "buyer"
 
