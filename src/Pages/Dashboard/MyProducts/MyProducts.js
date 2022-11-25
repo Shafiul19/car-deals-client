@@ -1,21 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider';
 // import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import Loading from '../../Shared/Loading'
 import { useQuery } from '@tanstack/react-query';
+import ConfirmationModal from '../../Shared/ConfirmationModal';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
-    // const [myProducts, setMyProducts] = useState([]);
+    const [deleteProduct, setDeleteProduct] = useState(null);
 
-    // useEffect(() => {
-    //     fetch(`http://localhost:5000/myproducts?email=${user?.email}`)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setMyProducts(data)
-    //         })
-    // }, [user?.email])
+    const closeModal = () => {
+        setDeleteProduct(null)
+    }
+
+
     const { data: myProducts = [], refetch, isLoading } = useQuery({
         queryKey: ['myproducts'],
         queryFn: async () => {
@@ -37,6 +36,19 @@ const MyProducts = () => {
                 console.log(data);
                 toast.success('Product Advertise successfully')
                 refetch()
+            })
+    }
+
+    const handleDeleteProduct = (product) => {
+        fetch(`http://localhost:5000/myproducts/${product._id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    refetch()
+                    toast.success(`${product.productName} deleted successfully`)
+                }
             })
     }
 
@@ -64,7 +76,7 @@ const MyProducts = () => {
                                 <td>{product.status}</td>
                                 <td>{product.originalPrice} Taka</td>
                                 <td>{product.resellPrice} Taka</td>
-                                <td><button className="btn btn-xs border-none rounded bg-red-600">Delete</button></td>
+                                <td><label htmlFor="confirmation-modal" onClick={() => setDeleteProduct(product)} className="btn btn-xs border-none rounded bg-red-600">Delete</label></td>
                                 <td>
                                     {product?.advertise ? <p>Asvertised</p> : <button onClick={() => handleAdvertise(product._id)} className="btn btn-xs border-none rounded bg-blue-600">Advertise</button>}
                                 </td>
@@ -74,7 +86,14 @@ const MyProducts = () => {
                     </tbody>
                 </table>
             </div>
-
+            {deleteProduct && <ConfirmationModal
+                title={'Are you sure want to delete'}
+                message={`If you delete ${deleteProduct.productName}. It can't be undone`}
+                successAction={handleDeleteProduct}
+                modalData={deleteProduct}
+                successButtonName="Delete"
+                closeModal={closeModal}
+            ></ConfirmationModal>}
         </div>
     );
 };
