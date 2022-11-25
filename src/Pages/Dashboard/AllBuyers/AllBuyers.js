@@ -32,7 +32,7 @@ const AllBuyers = () => {
             .then(data => {
                 if (data.deletedCount > 0) {
                     refetch()
-                    toast.success("This buyers deleted successfully")
+                    toast.success(`${buyer.name} deleted successfully`)
                 }
             })
     }
@@ -52,7 +52,7 @@ const AllBuyers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {allbuyers.map((buyer, i) => <tr key={buyer._id}>
+                        {allbuyers.map((buyer, i) => <tr className='hover' key={buyer._id}>
                             <th>{i + 1}</th>
                             <td>{buyer.name}</td>
                             <td>{buyer.email}</td>
