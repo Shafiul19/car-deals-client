@@ -40,6 +40,7 @@ const AddProduct = () => {
                         originalPrice: data.originalPrice,
                         resellPrice: data.resellPrice,
                         yearsOfUse: data.yearsOfUse,
+                        yearOfPurchase: data.yearOfPurchase,
                         mobile: data.mobile,
                         verified: false,
                         postingTime: new Date(),
@@ -131,6 +132,18 @@ const AddProduct = () => {
                         className="input input-bordered w-full max-w-xs"
                     />
                     {errors.yearsOfUse && <p className='text-red-500'>{errors.yearsOfUse.message}</p>}
+                </div>
+                <div className="form-control w-full ">
+                    <label className="label">
+                        <span className="label-text">Year of purchase</span>
+                    </label>
+                    <input type="text"
+                        {...register("yearOfPurchase", {
+                            required: "Year of purchase is required"
+                        })}
+                        className="input input-bordered w-full max-w-xs"
+                    />
+                    {errors.yearOfPurchase && <p className='text-red-500'>{errors.yearOfPurchase.message}</p>}
                 </div>
                 <div className="form-control w-full ">
                     <label className="label">
