@@ -1,18 +1,44 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import Loading from '../../Shared/Loading'
+import { useQuery } from '@tanstack/react-query';
 
 const MyProducts = () => {
-    const { user, loading } = useContext(AuthContext);
-    const [myProducts, setMyProducts] = useState([]);
+    const { user } = useContext(AuthContext);
+    // const [myProducts, setMyProducts] = useState([]);
 
-    useEffect(() => {
-        fetch(`http://localhost:5000/myproducts?email=${user?.email}`)
+    // useEffect(() => {
+    //     fetch(`http://localhost:5000/myproducts?email=${user?.email}`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setMyProducts(data)
+    //         })
+    // }, [user?.email])
+    const { data: myProducts = [], refetch, isLoading } = useQuery({
+        queryKey: ['myproducts'],
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:5000/myproducts?email=${user?.email}`);
+            const data = await res.json();
+            return data;
+        }
+    })
+    if (isLoading) {
+        return <Loading></Loading>
+    }
+
+    const handleAdvertise = id => {
+        fetch(`http://localhost:5000/myproducts/${id}`, {
+            method: 'PUT'
+        })
             .then(res => res.json())
             .then(data => {
-                setMyProducts(data)
+                console.log(data);
+                toast.success('Product Advertise successfully')
+                refetch()
             })
-    }, [user?.email])
-
+    }
 
     return (
         <div>
@@ -39,7 +65,9 @@ const MyProducts = () => {
                                 <td>{product.originalPrice} Taka</td>
                                 <td>{product.resellPrice} Taka</td>
                                 <td><button className="btn btn-xs border-none rounded bg-red-600">Delete</button></td>
-                                <td><button className="btn btn-xs border-none rounded bg-blue-600">Advertise</button></td>
+                                <td>
+                                    {product?.advertise ? <p>Asvertised</p> : <button onClick={() => handleAdvertise(product._id)} className="btn btn-xs border-none rounded bg-blue-600">Advertise</button>}
+                                </td>
                             </tr>)
                         }
 
