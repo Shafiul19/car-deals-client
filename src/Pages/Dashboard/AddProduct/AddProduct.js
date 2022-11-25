@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const AddProduct = () => {
-    const { user, loading } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const imageHostKey = process.env.REACT_APP_imgbb_key;
     const navigate = useNavigate();
