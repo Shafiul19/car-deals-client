@@ -45,11 +45,12 @@ const AddProduct = () => {
                         postingTime: new Date(),
                         sellerName: user.displayName,
                         sellerEmail: user.email,
-                        image: imgData.data.url
+                        image: imgData.data.url,
+                        status: "available"
                     }
                     // save product information to database
 
-                    fetch('http://localhost:5000/products', {
+                    fetch(`http://localhost:5000/products?email=${user?.email}`, {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

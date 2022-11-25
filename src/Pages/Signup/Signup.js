@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import car from '../../assets/car.png'
 import { AuthContext } from '../../contexts/AuthProvider';
-import useToken from '../../hooks/useToken';
+// import useToken from '../../hooks/useToken';
 import GoogleSignIn from '../Shared/GoogleSignIn';
 import Loading from '../Shared/Loading';
 
@@ -13,12 +13,10 @@ const Signup = () => {
     const { createUser, updateUser, loading, setLoading } = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
     const [createdUserEmail, setCreatedUserEmail] = useState('');
-    // const [token] = useToken(createdUserEmail);
+
     const navigate = useNavigate();
 
-    // if (token) {
-    //     navigate('/');
-    // }
+
 
     const handleSignUp = data => {
 
@@ -60,8 +58,8 @@ const Signup = () => {
         })
             .then(res => res.json())
             .then(data => {
-                setCreatedUserEmail(email);
                 console.log(data);
+                setCreatedUserEmail(email);
                 navigate('/');
                 toast.success('User Created Successfully')
             })

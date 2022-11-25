@@ -54,6 +54,7 @@ const GoogleSignIn = () => {
             .then(data => {
                 console.log(data);
                 setCreatedUserEmail(email);
+                navigate(from, { replace: true });
             })
 
     }
