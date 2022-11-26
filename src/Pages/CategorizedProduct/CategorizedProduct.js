@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Loading from '../Shared/Loading';
 import { MdVerifiedUser } from "react-icons/md";
+import BookingModal from './BookingModal';
+import { set } from 'react-hook-form';
 
 const CategorizedProduct = () => {
 
@@ -11,7 +13,7 @@ const CategorizedProduct = () => {
     console.log(booking);
 
     console.log(id);
-    const { data: products = [], isLoading } = useQuery({
+    const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/category/${id}`)
@@ -39,11 +41,18 @@ const CategorizedProduct = () => {
                             <p> Uses: {product.yearsOfUse} Years</p>
                             <p>Date of posting: {product.postingTime.slice(0, 10)}</p>
                             <p>Condition: {product.productCondition}</p>
-                            <button onClick={() => setBooking(product)} className='btn btn-info'>Book Now</button>
+                            <label htmlFor="booking-modal" onClick={() => setBooking(product)} className='btn btn-info'>Book Now</label>
                         </div>
                     </div>)
                 }
             </div>
+            {
+                booking && <BookingModal
+                    booking={booking}
+                    setBooking={setBooking}
+                    refetch={refetch}
+                ></BookingModal>
+            }
             <div className='flex justify-center'>
                 <Link to='/' className='btn btn-info my-10  text-center'>Back to home</Link>
             </div>
