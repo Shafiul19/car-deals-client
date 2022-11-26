@@ -4,7 +4,6 @@ import { Link, useParams } from 'react-router-dom';
 import Loading from '../Shared/Loading';
 import { MdVerifiedUser } from "react-icons/md";
 import BookingModal from './BookingModal';
-import { set } from 'react-hook-form';
 
 const CategorizedProduct = () => {
 
@@ -14,7 +13,7 @@ const CategorizedProduct = () => {
 
     console.log(id);
     const { data: products = [], isLoading, refetch } = useQuery({
-        queryKey: ['products'],
+        queryKey: ['products', id],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/category/${id}`)
             const data = res.json();

@@ -15,7 +15,7 @@ const AddProduct = () => {
         fetch('http://localhost:5000/catgories')
             .then(res => res.json())
             .then(data => setCategories(data))
-    })
+    }, [])
 
     const handleAddProduct = data => {
         console.log(data);
