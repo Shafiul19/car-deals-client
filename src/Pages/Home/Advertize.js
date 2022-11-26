@@ -16,10 +16,12 @@ const Advertize = () => {
     }
     return (
         <div>
-            {advertisedProduct?.length &&
+            {advertisedProduct?.length ?
                 <div>
                     <h3 className='my-10 text-3xl text-blue-600 uppercase font-bold text-center '>Advertizement</h3>
-                    <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-5 my-10'>
+                    <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-5 my-10'>
+
+                        {/* <div className="relative w-full flex gap-4 py-6 overflow-x-auto"> */}
                         {
                             advertisedProduct?.map(p => <div key={p._id} className="card v-96  bg-base-100 shadow-xl">
                                 <figure className='w-full h-5/6'><img src={p.image} alt={p.productName} /></figure>
@@ -34,6 +36,7 @@ const Advertize = () => {
                         }
                     </div>
                 </div>
+                : <></>
             }
         </div>
     );

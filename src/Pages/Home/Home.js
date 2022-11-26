@@ -2,15 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Advertize from './Advertize';
 import Banner from './Banner';
+import axios from 'axios';
 
 
 const Home = () => {
     const [categories, setCategories] = useState([]);
+
+    const fetchCategories = async () => {
+        try {
+            const res = await axios.get('http://localhost:5000/catgories');
+            setCategories(res.data)
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+
     useEffect(() => {
-        fetch('http://localhost:5000/catgories')
-            .then(res => res.json())
-            .then(data => setCategories(data))
-    })
+        fetchCategories();
+    }, [])
+
     return (
         <div>
             <Banner></Banner>
@@ -24,7 +35,7 @@ const Home = () => {
                             <p className='text-xl'>See all products from  {category.name} category</p>
                             <div className="card-actions ">
                                 <Link className='w-full btn btn-info' to={`/category/${category._id}`}>
-                                    Explore More Products
+                                    Explore All Products
                                 </Link>
                             </div>
                         </div>
