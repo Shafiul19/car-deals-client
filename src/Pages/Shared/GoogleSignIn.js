@@ -13,7 +13,7 @@ const GoogleSignIn = () => {
     const from = location.state?.from?.pathname || '/';
     const [createdUserEmail, setCreatedUserEmail] = useState('')
     // const [token] = useToken(createdUserEmail);
-    console.log(from);
+    console.log(createdUserEmail);
 
     if (loading) {
         return <Loading></Loading>
@@ -41,10 +41,28 @@ const GoogleSignIn = () => {
             })
     }
 
+    // const saveUser = (name, email, role) => {
+    //     const user = { name, email, role };
+    //     fetch('http://localhost:5000/users', {
+    //         method: 'POST',
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         },
+    //         body: JSON.stringify(user)
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             console.log(data);
+    //             setCreatedUserEmail(email);
+    //             navigate(from, { replace: true });
+    //         })
+
+    // }
+
     const saveUser = (name, email, role) => {
         const user = { name, email, role };
-        fetch('http://localhost:5000/users', {
-            method: 'POST',
+        fetch(`http://localhost:5000/user/${email}`, {
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
@@ -56,7 +74,6 @@ const GoogleSignIn = () => {
                 setCreatedUserEmail(email);
                 navigate(from, { replace: true });
             })
-
     }
     return (
         <div>

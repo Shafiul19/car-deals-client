@@ -47,10 +47,29 @@ const Signup = () => {
     }
 
 
+    // const saveUser = (name, email, role) => {
+    //     const user = { name, email, role };
+    //     fetch('http://localhost:5000/users', {
+    //         method: 'POST',
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         },
+    //         body: JSON.stringify(user)
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             console.log(data);
+    //             setCreatedUserEmail(email);
+    //             navigate('/');
+    //             toast.success('User Created Successfully')
+    //         })
+    // }
+
+
     const saveUser = (name, email, role) => {
         const user = { name, email, role };
-        fetch('http://localhost:5000/users', {
-            method: 'POST',
+        fetch(`http://localhost:5000/user/${email}`, {
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
@@ -64,7 +83,6 @@ const Signup = () => {
                 toast.success('User Created Successfully')
             })
     }
-
 
     if (loading) {
         return <Loading></Loading>
