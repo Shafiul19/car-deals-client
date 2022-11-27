@@ -24,7 +24,7 @@ const BookingModal = ({ booking, setBooking, refetch }) => {
             price,
             meetingLocation
         }
-        fetch(`http://localhost:5000/booking`, {
+        fetch(`http://localhost:5000/booking?email=${user?.email}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -39,7 +39,8 @@ const BookingModal = ({ booking, setBooking, refetch }) => {
                     toast.success('Booking Confirm');
                     refetch();
                 } else {
-                    toast.error(data.message)
+                    toast.error(data.message);
+                    setBooking(null);
                 }
             })
     }

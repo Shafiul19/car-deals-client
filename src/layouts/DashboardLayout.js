@@ -15,26 +15,26 @@ const DashboardLayout = () => {
             <NavbarForDashboard></NavbarForDashboard>
             <div className="drawer  drawer-mobile">
                 <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content">
+                <div className="drawer-content w-11/12 mx-auto">
                     {/* <!-- Page content here --> */}
                     <Outlet></Outlet>
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 bg-base-100 lg:bg-transparent text-base-content">
+                    <ul className="menu px-4 pt-16  w-80 bg-white text-base-content">
                         {/* <!-- Sidebar content here --> */}
-                        <li><Link to='/dashboard'>My Orders</Link></li>
+                        <li><Link className='btn btn-info w-full text-white my-2' to='/dashboard'>My Orders</Link></li>
                         {
                             isAdmin && <>
-                                <li><Link to='/dashboard/allbuyers'>All Buyers</Link></li>
-                                <li><Link to='/dashboard/allsellers'>All Seller</Link></li>
-                                <li><Link to='/dashboard/reporteditems'>Reported Items</Link></li>
+                                <li><Link className='btn btn-info w-full text-white my-2' to='/dashboard/allbuyers'>All Buyers</Link></li>
+                                <li><Link className='btn btn-info w-full text-white my-2' to='/dashboard/allsellers'>All Seller</Link></li>
+                                <li><Link className='btn btn-info w-full text-white my-2' to='/dashboard/reporteditems'>Reported Items</Link></li>
                             </>
                         }
                         {
                             isSeller && <>
-                                <li><Link to='/dashboard/addproduct'>Add a product</Link></li>
-                                <li><Link to='/dashboard/myproducts'>My Products</Link></li>
+                                <li><Link className='btn btn-info w-full text-white my-2' to='/dashboard/addproduct'>Add a product</Link></li>
+                                <li><Link className='btn btn-info w-full text-white my-2' to='/dashboard/myproducts'>My Products</Link></li>
                             </>
                         }
                     </ul>
