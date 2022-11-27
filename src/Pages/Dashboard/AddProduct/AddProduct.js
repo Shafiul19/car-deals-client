@@ -12,7 +12,7 @@ const AddProduct = () => {
 
     const [categories, setCategories] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/catgories')
+        fetch('https://car-deals-server.vercel.app/catgories')
             .then(res => res.json())
             .then(data => setCategories(data))
     }, [])
@@ -51,7 +51,7 @@ const AddProduct = () => {
                     }
                     // save product information to database
 
-                    fetch(`http://localhost:5000/products?email=${user?.email}`, {
+                    fetch(`https://car-deals-server.vercel.app/products?email=${user?.email}`, {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

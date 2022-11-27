@@ -18,7 +18,7 @@ const MyProducts = () => {
     const { data: myProducts = [], refetch, isLoading } = useQuery({
         queryKey: ['myproducts', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myproducts?email=${user?.email}`);
+            const res = await fetch(`https://car-deals-server.vercel.app/myproducts?email=${user?.email}`);
             const data = await res.json();
             return data;
         }
@@ -28,7 +28,7 @@ const MyProducts = () => {
     }
 
     const handleAdvertise = id => {
-        fetch(`http://localhost:5000/myproducts/${id}`, {
+        fetch(`https://car-deals-server.vercel.app/myproducts/${id}`, {
             method: 'PUT'
         })
             .then(res => res.json())
@@ -40,7 +40,7 @@ const MyProducts = () => {
     }
 
     const handleDeleteProduct = (product) => {
-        fetch(`http://localhost:5000/myproducts/${product._id}`, {
+        fetch(`https://car-deals-server.vercel.app/myproducts/${product._id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

@@ -16,7 +16,7 @@ const CategorizedProduct = () => {
     const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: ['products', id],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/category/${id}`)
+            const res = await fetch(`https://car-deals-server.vercel.app/category/${id}`)
             const data = res.json();
             return data;
         }
@@ -26,7 +26,7 @@ const CategorizedProduct = () => {
     }
     const handleReport = (product) => {
         console.log(product);
-        fetch(`http://localhost:5000/reportedproduct/${product._id}`, {
+        fetch(`https://car-deals-server.vercel.app/reportedproduct/${product._id}`, {
             method: 'PUT'
         })
             .then(res => res.json())

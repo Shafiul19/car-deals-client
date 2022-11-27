@@ -24,7 +24,7 @@ const BookingModal = ({ booking, setBooking, refetch }) => {
             price,
             meetingLocation
         }
-        fetch(`http://localhost:5000/booking?email=${user?.email}`, {
+        fetch(`https://car-deals-server.vercel.app/booking?email=${user?.email}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

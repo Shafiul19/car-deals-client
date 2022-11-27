@@ -49,7 +49,7 @@ const Signup = () => {
 
     // const saveUser = (name, email, role) => {
     //     const user = { name, email, role };
-    //     fetch('http://localhost:5000/users', {
+    //     fetch('https://car-deals-server.vercel.app/users', {
     //         method: 'POST',
     //         headers: {
     //             'content-type': 'application/json'
@@ -68,7 +68,7 @@ const Signup = () => {
 
     const saveUser = (name, email, role) => {
         const user = { name, email, role };
-        fetch(`http://localhost:5000/user/${email}`, {
+        fetch(`https://car-deals-server.vercel.app/user/${email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

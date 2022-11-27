@@ -11,7 +11,7 @@ const Home = () => {
 
     const fetchCategories = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/catgories');
+            const res = await axios.get('https://car-deals-server.vercel.app/catgories');
             setCategories(res.data)
         } catch (err) {
             console.log(err);

@@ -14,7 +14,7 @@ const AllBuyers = () => {
     const { data: allbuyers = [], isLoading, refetch } = useQuery({
         queryKey: ['allbuyes'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/allbuyers')
+            const res = await fetch('https://car-deals-server.vercel.app/allbuyers')
             const data = await res.json();
             return data;
         }
@@ -25,7 +25,7 @@ const AllBuyers = () => {
     }
 
     const handleDeleteBuyer = (buyer) => {
-        fetch(`http://localhost:5000/buyer/${buyer._id}`, {
+        fetch(`https://car-deals-server.vercel.app/buyer/${buyer._id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
