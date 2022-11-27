@@ -1,10 +1,9 @@
 import React from 'react';
-import react from '../../assets/react.png'
 const Blogs = () => {
     return (
         <div>
             <h1 className='text-3xl mt-5 text-center font-bold text-blue-600'>Blogs</h1>
-            <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 ">
+            <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 shadow-xl mb-5">
                 <div className="grid gap-6 row-gap-10 lg:grid-cols-1">
                     <div className="lg:py-6 lg:pr-16">
                         <div className="flex">
@@ -249,13 +248,6 @@ const Blogs = () => {
                             </div>
                         </div>
                     </div>
-                    {/* <div className="relative">
-                        <img
-                            className="inset-0 object-cover object-bottom w-full rounded shadow-lg h-96 lg:absolute lg:h-full"
-                            src={react}
-                            alt=""
-                        />
-                    </div> */}
                 </div>
             </div>
         </div>
