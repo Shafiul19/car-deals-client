@@ -32,15 +32,16 @@ const CategorizedProduct = () => {
                     products.map(product => <div key={product._id} className="card v-96  bg-base-100 shadow-xl">
                         <figure className='w-full h-5/6 bg-slate-100'><img src={product.image} alt={product.productName} /></figure>
                         <div className="card-body">
-                            <h2 className="card-title">{product.productName}</h2>
-                            <h2 className='text-lg font-semibold flex items-center'>Seller Name: {product.sellerName} {product?.var && <MdVerifiedUser className='text-blue-700'></MdVerifiedUser>}</h2>
-                            <p>Location: {product.location}</p>
-                            <p>Original Price: {product.originalPrice} Taka</p>
-                            <p className='text-red-600'>Resale Price: {product.resellPrice} Taka</p>
-                            <p> Uses: {product.yearsOfUse} Years</p>
-                            <p>Date of posting: {product.postingTime.slice(0, 10)}</p>
-                            <p>Condition: {product.productCondition}</p>
+                            <h2 className="card-title text-2xl">{product.productName}</h2>
+                            <h2 className='text-xl font-semibold flex items-center'>Seller Name: {product.sellerName} {product?.var && <MdVerifiedUser className='text-blue-700'></MdVerifiedUser>}</h2>
+                            <p className='text-lg font-semibold'>Location: {product.location}</p>
+                            <p className='text-lg font-semibold'>Original Price: {product.originalPrice} Taka</p>
+                            <p className='text-red-600 text-lg font-semibold'>Resale Price: {product.resellPrice} Taka</p>
+                            <p className='text-lg font-semibold'> Uses: {product.yearsOfUse} Years</p>
+                            <p className='text-lg font-semibold'>Date of posting: {product.postingTime.slice(0, 10)}</p>
+                            <p className='text-lg font-semibold'>Condition: {product.productCondition}</p>
                             <label htmlFor="booking-modal" onClick={() => setBooking(product)} className='btn btn-info'>Book Now</label>
+                            <button className='btn bg-red-600 border-none'>Report to admin</button>
                         </div>
                     </div>)
                 }
