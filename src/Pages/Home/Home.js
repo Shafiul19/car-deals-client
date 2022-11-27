@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Advertize from './Advertize';
 import Banner from './Banner';
 import axios from 'axios';
+import Footer from './Footer';
 
 
 const Home = () => {
@@ -43,6 +44,7 @@ const Home = () => {
                     )}
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 };
