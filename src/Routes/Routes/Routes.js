@@ -52,7 +52,7 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
-                path: '/dashboard',
+                path: '/dashboard/myorder',
                 element: <MyOrders></MyOrders>
             },
             {

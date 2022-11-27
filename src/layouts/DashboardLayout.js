@@ -21,9 +21,9 @@ const DashboardLayout = () => {
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-                    <ul className="menu px-4 pt-16  w-80 bg-white text-base-content">
+                    <ul className="menu px-4 pt-16  w-80 bg-white lg:bg-transparent text-base-content">
                         {/* <!-- Sidebar content here --> */}
-                        <li><Link className='btn btn-info w-full text-white my-2' to='/dashboard'>My Orders</Link></li>
+                        <li><Link className='btn btn-info w-full text-white my-2' to='/dashboard/myorder'>My Orders</Link></li>
                         {
                             isAdmin && <>
                                 <li><Link className='btn btn-info w-full text-white my-2' to='/dashboard/allbuyers'>All Buyers</Link></li>
