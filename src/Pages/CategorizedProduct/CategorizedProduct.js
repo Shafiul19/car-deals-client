@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import Loading from '../Shared/Loading';
 import { MdVerifiedUser } from "react-icons/md";
 import BookingModal from './BookingModal';
+import toast from 'react-hot-toast';
 
 const CategorizedProduct = () => {
 
@@ -23,6 +24,19 @@ const CategorizedProduct = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
+    const handleReport = (product) => {
+        console.log(product);
+        fetch(`http://localhost:5000/reportedproduct/${product._id}`, {
+            method: 'PUT'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                toast.success(`${product.productName} reported`)
+                refetch();
+            })
+    }
+
     return (
 
         <div>
@@ -41,7 +55,15 @@ const CategorizedProduct = () => {
                             <p className='text-lg font-semibold'>Date of posting: {product.postingTime.slice(0, 10)}</p>
                             <p className='text-lg font-semibold'>Condition: {product.productCondition}</p>
                             <label htmlFor="booking-modal" onClick={() => setBooking(product)} className='btn btn-info'>Book Now</label>
-                            <button className='btn bg-red-600 border-none'>Report to admin</button>
+                            {
+                                product?.reported ?
+
+                                    <p className='text-center text-red-600 text-2xl font-bold'>
+                                        Reported
+                                    </p>
+                                    :
+                                    <button onClick={() => handleReport(product)} className='btn bg-red-600 border-none'>Report to admin</button>
+                            }
                         </div>
                     </div>)
                 }
