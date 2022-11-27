@@ -33,7 +33,7 @@ const CategorizedProduct = () => {
                         <figure className='w-full h-5/6 bg-slate-100'><img src={product.image} alt={product.productName} /></figure>
                         <div className="card-body">
                             <h2 className="card-title text-2xl">{product.productName}</h2>
-                            <h2 className='text-xl font-semibold flex items-center'>Seller Name: {product.sellerName} {product?.var && <MdVerifiedUser className='text-blue-700'></MdVerifiedUser>}</h2>
+                            <h2 className='text-xl font-semibold flex items-center'>Seller Name: {product.sellerName} {product?.verified && <MdVerifiedUser className='text-blue-700'></MdVerifiedUser>}</h2>
                             <p className='text-lg font-semibold'>Location: {product.location}</p>
                             <p className='text-lg font-semibold'>Original Price: {product.originalPrice} Taka</p>
                             <p className='text-red-600 text-lg font-semibold'>Resale Price: {product.resellPrice} Taka</p>

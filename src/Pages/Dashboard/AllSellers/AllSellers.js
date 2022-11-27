@@ -36,6 +36,18 @@ const AllSellers = () => {
                 }
             })
     }
+    const handleVerify = email => {
+        console.log(email);
+        fetch(`http://localhost:5000/verifyseller/${email}`, {
+            method: 'PUT',
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                refetch();
+            })
+    }
+
     return (
         <div>
             <h3 className='text-center text-3xl text-blue-600 my-4'> All Sellers Info</h3>
@@ -57,7 +69,10 @@ const AllSellers = () => {
                             <td>{seller.name}</td>
                             <td>{seller.email}</td>
                             <td><label htmlFor="confirmation-modal" onClick={() => setDeletingSeller(seller)} className='btn btn-sm bg-red-600 rounded border-none'>Delete</label></td>
-                            <td><button className='btn btn-sm rounded btn-success'>Verify</button></td>
+                            <td>{seller?.verified ? "Verified" :
+                                <button onClick={() => handleVerify(seller.email)} className='btn btn-sm rounded btn-success'>Verify</button>
+                            }
+                            </td>
                         </tr>)}
                     </tbody>
                 </table>
