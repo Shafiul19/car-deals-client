@@ -4,6 +4,7 @@ import Advertize from './Advertize';
 import Banner from './Banner';
 import axios from 'axios';
 import Footer from './Footer';
+import Stats from './Stats';
 
 
 const Home = () => {
@@ -44,6 +45,7 @@ const Home = () => {
                     )}
                 </div>
             </div>
+            <Stats></Stats>
             <Footer></Footer>
         </div>
     );
