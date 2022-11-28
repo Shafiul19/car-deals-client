@@ -18,7 +18,11 @@ const MyProducts = () => {
     const { data: myProducts = [], refetch, isLoading } = useQuery({
         queryKey: ['myproducts', user?.email],
         queryFn: async () => {
-            const res = await fetch(`https://car-deals-server.vercel.app/myproducts?email=${user?.email}`);
+            const res = await fetch(`https://car-deals-server.vercel.app/myproducts?email=${user?.email}`, {
+                headers: {
+                    authorizaion: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
             const data = await res.json();
             return data;
         }
@@ -29,7 +33,10 @@ const MyProducts = () => {
 
     const handleAdvertise = id => {
         fetch(`https://car-deals-server.vercel.app/myproducts/${id}`, {
-            method: 'PUT'
+            method: 'PUT',
+            headers: {
+                authorizaion: `bearer ${localStorage.getItem('accessToken')}`
+            },
         })
             .then(res => res.json())
             .then(data => {
@@ -41,7 +48,10 @@ const MyProducts = () => {
 
     const handleDeleteProduct = (product) => {
         fetch(`https://car-deals-server.vercel.app/myproducts/${product._id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                authorizaion: `bearer ${localStorage.getItem('accessToken')}`
+            },
         })
             .then(res => res.json())
             .then(data => {
@@ -70,7 +80,7 @@ const MyProducts = () => {
                     </thead>
                     <tbody>
                         {
-                            myProducts.map((product, i) => <tr key={product._id}>
+                            myProducts?.map((product, i) => <tr key={product._id}>
                                 <th>{i + 1}</th>
                                 <td>{product.productName}</td>
                                 <td>{product.status}</td>

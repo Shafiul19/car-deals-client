@@ -7,6 +7,7 @@ import Footer from './Footer';
 import Stats from './Stats';
 
 
+
 const Home = () => {
     const [categories, setCategories] = useState([]);
 

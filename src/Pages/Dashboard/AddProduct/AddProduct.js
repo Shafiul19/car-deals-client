@@ -55,6 +55,7 @@ const AddProduct = () => {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
+                            authorizaion: `bearer ${localStorage.getItem('accessToken')}`
                         },
                         body: JSON.stringify(product)
                     })
@@ -179,7 +180,7 @@ const AddProduct = () => {
                         required: "Category is required"
                     })}
                         className="select select-bordered w-full max-w-xs">
-                        {categories.map(category => <option key={category._id} value={category._id}>{category.name}</option>)}
+                        {categories?.map(category => <option key={category._id} value={category._id}>{category.name}</option>)}
                     </select>
                     {errors.productCategory && <p className='text-red-500'>{errors.productCategory.message}</p>}
                 </div>

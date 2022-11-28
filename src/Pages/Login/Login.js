@@ -12,8 +12,6 @@ const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { signIn, loading, setLoading } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
-    const [loginUserEmail, setLoginUserEmail] = useState('');
-
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
@@ -25,8 +23,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                setLoginUserEmail(data.email);
-                navigate(from, { replace: true });
+                saveUser(data.email)
             })
             .catch(error => {
                 setLoginError(error.message);
@@ -36,13 +33,32 @@ const Login = () => {
                 setLoading(false)
             })
     }
-
+    const saveUser = (email) => {
+        const user = { email };
+        fetch(`https://car-deals-server.vercel.app/user/${email}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                const accessToken = data?.data;
+                if (accessToken) {
+                    localStorage.setItem("accessToken", accessToken);
+                    navigate(from, { replace: true });
+                    toast.success('User Login Successful')
+                }
+            })
+    }
 
     if (loading) {
         return <Loading></Loading>
     }
     return (
-        <div className='min-h-screen flex justify-center items-center '>
+        <div className='min-h-[700px] flex justify-center items-center shadow-xl mt-10'>
             <img className='hidden lg:block w-1/4 mr-10' src={car} alt="" />
             <div className='w-96 p-7 shadow-lg'>
                 <h2 className='text-xl text-center'>Login</h2>

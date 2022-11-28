@@ -1,19 +1,27 @@
+import axios from 'axios';
 import { useEffect, useState } from "react";
-
-const useToken = email => {
-    const [token, setToken] = useState('');
+const useToken = (user) => {
+    const [token, setToken] = useState('')
+    console.log('for generate token', user)
     useEffect(() => {
-        if (email) {
-            fetch(`https://car-deals-server.vercel.app/jwt?email=${email}`)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.accessToken) {
-                        localStorage.setItem('accessToken', data.accessToken);
-                        setToken(data.accessToken);
-                    }
-                });
+        const email = user?.email;
+        console.log('email', email)
+        const uid = user?.uid;
+        console.log('uid', uid);
+        const currentUser = {
+            email: email,
+            uid: uid
         }
-    }, [email])
+        if (email && uid) {
+            axios.put(`https://car-deals-server.vercel.app/user/${email}`, currentUser)
+                .then(res => {
+                    // console.log(res?.data?.data);
+                    const accessToken = res?.data?.data;
+                    setToken(accessToken);
+                    localStorage.setItem("accessToken", accessToken);
+                })
+        }
+    }, [user])
 
     return [token]
 }

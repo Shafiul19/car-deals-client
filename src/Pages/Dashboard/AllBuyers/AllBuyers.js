@@ -14,7 +14,11 @@ const AllBuyers = () => {
     const { data: allbuyers = [], isLoading, refetch } = useQuery({
         queryKey: ['allbuyes'],
         queryFn: async () => {
-            const res = await fetch('https://car-deals-server.vercel.app/allbuyers')
+            const res = await fetch('https://car-deals-server.vercel.app/allbuyers', {
+                headers: {
+                    authorizaion: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
             const data = await res.json();
             return data;
         }
@@ -26,7 +30,10 @@ const AllBuyers = () => {
 
     const handleDeleteBuyer = (buyer) => {
         fetch(`https://car-deals-server.vercel.app/buyer/${buyer._id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                authorizaion: `bearer ${localStorage.getItem('accessToken')}`
+            }
         })
             .then(res => res.json())
             .then(data => {
@@ -52,7 +59,7 @@ const AllBuyers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {allbuyers.map((buyer, i) => <tr className='hover' key={buyer._id}>
+                        {allbuyers?.map((buyer, i) => <tr className='hover' key={buyer._id}>
                             <th>{i + 1}</th>
                             <td>{buyer.name}</td>
                             <td>{buyer.email}</td>

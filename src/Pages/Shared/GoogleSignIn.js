@@ -1,28 +1,23 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import Loading from './Loading';
 import { FcGoogle } from "react-icons/fc";
 import toast from 'react-hot-toast';
-// import useToken from '../../hooks/useToken';
+
 
 const GoogleSignIn = () => {
     const { googleSignIn, loading, setLoading } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
-    const [createdUserEmail, setCreatedUserEmail] = useState('')
-    // const [token] = useToken(createdUserEmail);
-    console.log(createdUserEmail);
+
+
 
     if (loading) {
         return <Loading></Loading>
     }
 
-    // if (token) {
-    //     navigate(from, { replace: true });
-    //     toast.success('User Logged in successfully');
-    // }
     const handleGoogleSignIn = () => {
         const role = "buyer"
 
@@ -41,23 +36,7 @@ const GoogleSignIn = () => {
             })
     }
 
-    // const saveUser = (name, email, role) => {
-    //     const user = { name, email, role };
-    //     fetch('https://car-deals-server.vercel.app/users', {
-    //         method: 'POST',
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(user)
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             console.log(data);
-    //             setCreatedUserEmail(email);
-    //             navigate(from, { replace: true });
-    //         })
 
-    // }
 
     const saveUser = (name, email, role) => {
         const user = { name, email, role };
@@ -71,8 +50,13 @@ const GoogleSignIn = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                setCreatedUserEmail(email);
-                navigate(from, { replace: true });
+                const accessToken = data?.data;
+                if (accessToken) {
+                    localStorage.setItem("accessToken", accessToken);
+                    navigate(from, { replace: true });
+                    toast.success('User Login Successfully')
+                }
+
             })
     }
     return (

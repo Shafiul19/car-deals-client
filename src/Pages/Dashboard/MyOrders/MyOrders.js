@@ -9,7 +9,11 @@ const MyOrders = () => {
     const { data: bookings = [], isLoading } = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
-            const res = await fetch(`https://car-deals-server.vercel.app/bookings?email=${user?.email}`);
+            const res = await fetch(`https://car-deals-server.vercel.app/bookings?email=${user?.email}`, {
+                headers: {
+                    authorizaion: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
             const data = await res.json();
             return data;
         }

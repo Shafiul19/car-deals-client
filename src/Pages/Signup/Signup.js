@@ -12,8 +12,6 @@ const Signup = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { createUser, updateUser, loading, setLoading } = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
-    const [createdUserEmail, setCreatedUserEmail] = useState('');
-
     const navigate = useNavigate();
 
 
@@ -47,25 +45,6 @@ const Signup = () => {
     }
 
 
-    // const saveUser = (name, email, role) => {
-    //     const user = { name, email, role };
-    //     fetch('https://car-deals-server.vercel.app/users', {
-    //         method: 'POST',
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(user)
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             console.log(data);
-    //             setCreatedUserEmail(email);
-    //             navigate('/');
-    //             toast.success('User Created Successfully')
-    //         })
-    // }
-
-
     const saveUser = (name, email, role) => {
         const user = { name, email, role };
         fetch(`https://car-deals-server.vercel.app/user/${email}`, {
@@ -78,9 +57,12 @@ const Signup = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                setCreatedUserEmail(email);
-                navigate('/');
-                toast.success('User Created Successfully')
+                const accessToken = data?.data;
+                if (accessToken) {
+                    localStorage.setItem("accessToken", accessToken);
+                    navigate('/');
+                    toast.success('User Created Successfully')
+                }
             })
     }
 
@@ -89,7 +71,7 @@ const Signup = () => {
     }
 
     return (
-        <div className='min-h-screen flex justify-center items-center'>
+        <div className='min-h-[700px] flex justify-center items-center shadow-xl mt-10'>
             <img className='hidden lg:block w-1/4 mr-10' src={car} alt="" />
             <div className='w-96 p-7 shadow-lg'>
                 <h2 className='text-xl text-center'>Sign Up</h2>

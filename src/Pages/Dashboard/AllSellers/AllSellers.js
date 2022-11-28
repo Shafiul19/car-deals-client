@@ -12,10 +12,14 @@ const AllSellers = () => {
         setDeletingSeller(null)
     }
 
-    const { data: AllSellers = [], isLoading, refetch } = useQuery({
+    const { data: allSellers = [], isLoading, refetch } = useQuery({
         queryKey: ['allSellers'],
         queryFn: async () => {
-            const res = await fetch('https://car-deals-server.vercel.app/allsellers')
+            const res = await fetch('https://car-deals-server.vercel.app/allsellers', {
+                headers: {
+                    authorizaion: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
             const data = await res.json();
             return data;
         }
@@ -26,7 +30,10 @@ const AllSellers = () => {
     }
     const handleDeleteSeller = (seller) => {
         fetch(`https://car-deals-server.vercel.app/seller/${seller._id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                authorizaion: `bearer ${localStorage.getItem('accessToken')}`
+            }
         })
             .then(res => res.json())
             .then(data => {
@@ -40,6 +47,9 @@ const AllSellers = () => {
         console.log(email);
         fetch(`https://car-deals-server.vercel.app/verifyseller/${email}`, {
             method: 'PUT',
+            headers: {
+                authorizaion: `bearer ${localStorage.getItem('accessToken')}`
+            }
         })
             .then(res => res.json())
             .then(data => {
@@ -65,7 +75,7 @@ const AllSellers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {AllSellers.map((seller, i) => <tr className='hover' key={seller._id}>
+                        {allSellers?.map((seller, i) => <tr className='hover' key={seller._id}>
                             <th>{i + 1}</th>
                             <td>{seller.name}</td>
                             <td>{seller.email}</td>
