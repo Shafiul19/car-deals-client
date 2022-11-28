@@ -1,3 +1,33 @@
+# Project Name: CAR DEALS
+
+## Live Website : https://car-deals-a187b.web.app/
+
+### adminEmail: user@admin.com
+### adminPassword: 123456
+
+### Feature and Functionallity
+* This is a 2nd hand resale website to buy and sell used car
+* In this website a user can register as buyer or seller. If any one try login via google by default his/her role will be buyer.
+* As a buyer you can order cars by clicking book now button
+* As a seller can add car in dashboard's add a product page.
+* A seller can advertise his product by clicking advertize button in Dashboard's my product page. Advertize product will displayed in Home page
+* Also a seller can delete his product.
+* A admin can manage all buyer , all seller and reported product page.
+* Amdin can delete a buyer, a seller and and a reported product
+* Also a admin can verify a seller
+
+### Technology Used
+* React
+* React-router-dom
+* Context api
+* Tailwind css
+* Daisy UI
+* Firebase Authentication
+* react query
+* Axios
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

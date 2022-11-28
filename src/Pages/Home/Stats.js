@@ -5,7 +5,7 @@ const Stats = () => {
         <div>
             <h3 className='text-3xl font-semibold text-center my-5'>Some Statistics About our site</h3>
             <section className="p-4 my-6 md:p-8">
-                <div className="container grid grid-cols-1 gap-6 m-4 mx-auto md:m-0 md:grid-cols-2 xl:grid-cols-3">
+                <div className="container grid grid-cols-1 gap-6 m-4 mx-auto md:m-0 md:grid-cols-2">
                     <div className="flex overflow-hidden rounded-lg  ">
                         <div className="flex items-center justify-center px-4 ">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" className="w-6 h-6">
