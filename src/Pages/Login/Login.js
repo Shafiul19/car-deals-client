@@ -58,8 +58,8 @@ const Login = () => {
         return <Loading></Loading>
     }
     return (
-        <div className='min-h-[700px] flex justify-center items-center shadow-xl mt-10'>
-            <img className='hidden lg:block w-1/4 mr-10' src={car} alt="" />
+        <div className='min-h-[500px] flex justify-center items-center  mt-10'>
+            {/* <img className='hidden lg:block w-1/4 mr-10' src={car} alt="" /> */}
             <div className='w-96 p-7 shadow-lg'>
                 <h2 className='text-xl text-center'>Login</h2>
                 <form onSubmit={handleSubmit(handleLogin)}>

@@ -39,21 +39,24 @@ const CategorizedProduct = () => {
 
     return (
 
-        <div>
-            <h3 className='text-3xl text-blue-600 font-semibold text-center my-10'>All Products in this categoy</h3>
-            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-10'>
+        <div className='w-11/12 mx-auto'>
+            <h3 className='text-3xl text-blue-600 font-semibold text-center my-5'>All Products in this categoy</h3>
+            <div className='grid md:grid-cols-2 lg:grid-cols-3  gap-10'>
                 {
-                    products.map(product => <div key={product._id} className="card v-96  bg-base-100 shadow-xl">
-                        <figure className='w-full h-5/6 bg-slate-100'><img src={product.image} alt={product.productName} /></figure>
+                    products.map(product => <div key={product._id} className="card  bg-base-100 shadow-xl ">
+                        <figure className='h-5/6 '><img src={product.image} alt={product.productName} /></figure>
                         <div className="card-body">
-                            <h2 className="card-title text-2xl">{product.productName}</h2>
-                            <h2 className='text-xl font-semibold flex items-center'>Seller Name: {product.sellerName} {product?.verified && <MdVerifiedUser className='text-blue-700'></MdVerifiedUser>}</h2>
-                            <p className='text-lg font-semibold'>Location: {product.location}</p>
-                            <p className='text-lg font-semibold'>Original Price: {product.originalPrice} Taka</p>
-                            <p className='text-red-600 text-lg font-semibold'>Resale Price: {product.resellPrice} Taka</p>
-                            <p className='text-lg font-semibold'> Uses: {product.yearsOfUse} Years</p>
-                            <p className='text-lg font-semibold'>Date of posting: {product.postingTime.slice(0, 10)}</p>
-                            <p className='text-lg font-semibold'>Condition: {product.productCondition}</p>
+                            <h2 className="card-title text-lg leading-4">{product.productName}</h2>
+                            <h2 className='font-semibold flex items-center leading-4'>Seller Name: {product.sellerName} {product?.verified && <MdVerifiedUser className='text-blue-700'></MdVerifiedUser>}</h2>
+                            <p className=' leading-4'>Location: {product.location}</p>
+                            {/* <p className=' leading-4'>Original Price: {product.originalPrice} Taka</p> */}
+                            <p className='text-red-600 leading-4'>Resale Price: {product.resellPrice} Taka</p>
+
+                            <p className='leading-4'> Uses: {product.yearsOfUse} Years</p>
+                            <p className='leading-4'>Condition: {product.productCondition}</p>
+
+                            {/* <p className='leading-4'>Date of posting: {product.postingTime.slice(0, 10)}</p> */}
+
                             <label htmlFor="booking-modal" onClick={() => setBooking(product)} className='btn btn-info'>Book Now</label>
                             {
                                 product?.reported ?

@@ -71,8 +71,8 @@ const Signup = () => {
     }
 
     return (
-        <div className='min-h-[700px] flex justify-center items-center shadow-xl mt-10'>
-            <img className='hidden lg:block w-1/4 mr-10' src={car} alt="" />
+        <div className='min-h-[600px] flex justify-center items-center  mt-10'>
+            {/* <img className='hidden lg:block w-1/4 mr-10' src={car} alt="" /> */}
             <div className='w-96 p-7 shadow-lg'>
                 <h2 className='text-xl text-center'>Sign Up</h2>
                 <form onSubmit={handleSubmit(handleSignUp)} >
@@ -131,7 +131,7 @@ const Signup = () => {
                     <input className='btn btn-info rounded w-full mt-4' value="Sign Up" type="submit" />
                     {signUpError && <p className='text-red-500'>{signUpError}</p>}
                 </form>
-                <p>Already have an account? <Link className='text-blue-600' to='/login'>please login</Link></p>
+                <p>Already have an account? <Link className='text-blue-600' to='/login'>Please login</Link></p>
                 <div className='divider'>OR</div>
                 <GoogleSignIn></GoogleSignIn>
             </div >
